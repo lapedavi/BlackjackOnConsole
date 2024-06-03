@@ -8,17 +8,17 @@ namespace BlackjackOnConsole
 {
     internal static class Deck
     {
-        private static List<int>? cards;
+        private static List<int>? _cards;
 
         private static List<int> Cards
         {
             get
             {
-                if(cards == null)
+                if(_cards == null)
                 {
                     InitializeDeck();
                 }
-                return cards!;
+                return _cards!;
             }
         }
 
@@ -42,7 +42,7 @@ namespace BlackjackOnConsole
                 newCards.AddRange(suite);
             }
 
-            cards = newCards;
+            _cards = newCards;
         }
     }
 }
