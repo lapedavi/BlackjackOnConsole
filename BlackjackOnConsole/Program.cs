@@ -5,7 +5,7 @@ internal class Program
     private static void Main(string[] args)
     {
         Console.WriteLine("\nWelcome to BlackJack On Console");
-        var bank = 10000;
+        var bank = 100;
 
         while (bank > 0)
         {
@@ -25,8 +25,8 @@ internal class Program
 
             bank -= bet;
 
-            var dealersHand = new Hand();
-            var playersHand = new Hand();
+            var dealersHand = new Hand("Dealer");
+            var playersHand = new Hand("Player");
             var stay = false;
 
             while(playersHand.Sum <= 21 && !stay)
@@ -92,8 +92,8 @@ internal class Program
 
     private static void DisplayHands(Hand dealersHand, Hand playersHand)
     {
-        Console.WriteLine($"\nHouse ({dealersHand.Sum}): {dealersHand.Cards}");
-        Console.WriteLine($"Player ({playersHand.Sum}): {playersHand.Cards}");
+        Console.WriteLine(dealersHand);
+        Console.WriteLine(playersHand);
     }
 }
 

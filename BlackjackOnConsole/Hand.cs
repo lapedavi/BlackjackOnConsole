@@ -8,25 +8,27 @@ namespace BlackjackOnConsole
 {
     internal class Hand
     {
-        private List<int> cards;
+        private readonly List<int> _cards;
+        private readonly string _owner;
 
-        public Hand() 
+        public Hand(string owner) 
         {
-            cards = [ Deck.DrawCard(), Deck.DrawCard()];
+            _cards = [ Deck.DrawCard(), Deck.DrawCard()];
+            _owner = owner;
         }
 
         public void DrawCard()
         {
-            cards.Add(Deck.DrawCard());
+            _cards.Add(Deck.DrawCard());
         }
 
         public int Sum
         {
             get
             {
-                var total = cards.Sum();
+                var total = _cards.Sum();
 
-                if (!cards.Contains(1))
+                if (!_cards.Contains(1))
                 {
                     return total;
                 }
@@ -42,12 +44,17 @@ namespace BlackjackOnConsole
             }
         }
 
-        public string Cards
+        private string Cards
         {
             get
             {
-                return string.Join(',', cards);
+                return string.Join(',', _cards);
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{_owner} ({Sum}): {Cards}";
         }
     }
 }
