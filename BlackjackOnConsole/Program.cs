@@ -4,6 +4,23 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        string replayInput = string.Empty;
+        while (replayInput != "n") {
+            Play();
+
+            replayInput = string.Empty;
+            while (replayInput != "y" && replayInput != "n")
+            {
+                Console.Write("\nWould you like to play again (y) (n): ");
+                replayInput = Console.ReadLine() ?? string.Empty;
+            }
+
+            Console.Clear();
+        }
+    }
+
+    private static void Play()
+    {
         Console.WriteLine("\nWelcome to BlackJack On Console");
         var bank = 100;
 
@@ -12,12 +29,12 @@ internal class Program
             Deck.InitializeDeck();
 
             var bet = 0;
-            while(bet <= 0)
+            while (bet <= 0)
             {
                 Console.Write($"You have {bank:N0}, how much would you like to bet: ");
                 var betInput = Console.ReadLine();
 
-                if(int.TryParse(betInput, out var output) && output <= bank)
+                if (int.TryParse(betInput, out var output) && output <= bank)
                 {
                     bet = output;
                 }
@@ -29,22 +46,21 @@ internal class Program
             var playersHand = new Hand("Player");
             var stay = false;
 
-            while(playersHand.Sum <= 21 && !stay)
+            while (playersHand.Sum <= 21 && !stay)
             {
                 DisplayHands(dealersHand, playersHand);
 
-                var choiceInput = "bad input";
-                while(choiceInput != "h" && choiceInput != "s")
+                var choiceInput = string.Empty;
+                while (choiceInput != "h" && choiceInput != "s")
                 {
                     Console.Write("Would you like to hit or stay (h) (s): ");
                     choiceInput = Console.ReadLine();
                 }
 
-                if(choiceInput == "h")
+                if (choiceInput == "h")
                 {
                     playersHand.DrawCard();
-                } 
-                else
+                } else
                 {
                     stay = true;
                 }
@@ -54,39 +70,32 @@ internal class Program
             {
                 DisplayHands(dealersHand, playersHand);
                 Console.WriteLine("Player Busts, Dealer Wins");
-            }
-            else if(playersHand.Sum < dealersHand.Sum)
+            } else if (playersHand.Sum < dealersHand.Sum)
             {
                 DisplayHands(dealersHand, playersHand);
                 Console.WriteLine("Dealer Wins");
-            } 
-            else
+            } else
             {
-                while(dealersHand.Sum <= playersHand.Sum && dealersHand.Sum <= 21)
+                while (dealersHand.Sum <= playersHand.Sum && dealersHand.Sum <= 21)
                 {
                     dealersHand.DrawCard();
                 }
 
-                DisplayHands(dealersHand, playersHand); 
+                DisplayHands(dealersHand, playersHand);
 
                 if (dealersHand.Sum > 21)
                 {
                     bank += bet * 2;
                     Console.WriteLine("Dealer Busts, Player Wins");
-                }
-                else if(playersHand.Sum > dealersHand.Sum)
+                } else if (playersHand.Sum > dealersHand.Sum)
                 {
                     bank += bet * 2;
                     Console.WriteLine("Player Wins");
-                }
-                else
+                } else
                 {
                     Console.WriteLine("Dealer Wins");
                 }
             }
-
-            Console.ReadLine();
-            Console.Clear();
         }
     }
 
@@ -105,20 +114,5 @@ internal class Program
     {
         Console.Write("How many players will be playing: "); 
         playerNumberInput = Console.ReadLine();
-    }
-*/
-
-/* QUIT STUFF
-     var keepPlayingInput = "bad value";
-    while (keepPlayingInput != "y" && keepPlayingInput != "n")
-    {
-        Console.Write("Would you like to keeping player (y) (n): ");
-        keepPlayingInput = Console.ReadLine();
-    }
-
-    if(keepPlayingInput == "n")
-    {
-        Console.WriteLine("Goodbye");
-        playing = false;
     }
 */
