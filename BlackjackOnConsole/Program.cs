@@ -90,10 +90,12 @@ internal class Program
         }
     }
 
-    private static void DisplayHands(Hand dealersHand, Hand playersHand)
+    private static void DisplayHands(params Hand[] hands)
     {
-        Console.WriteLine(dealersHand);
-        Console.WriteLine(playersHand);
+        foreach(Hand hand in hands)
+        {
+            Console.WriteLine(hand);
+        }
     }
 }
 
